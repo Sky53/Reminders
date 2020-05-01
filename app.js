@@ -12,13 +12,23 @@ new Vue({
 	data: {
 		tasks: tasks,
 		task: tasks[0],
-		selectTaskIndex: 0,
-		cardVisibility: false
+		selectedTaskIndex: 0,
+		cardVisibility: false,
+		search: '',
+		jnlVisibility: false
 	},
 	methods: {
 		selectTask: function(index) {
-			this.task = tasks[index]
-			this.selectTaskIndex = index
+			this.selectedTaskIndex = index
+			this.task = this.filteredTasks[index]
 		}
-	}
+	},
+	computed: {
+		filteredTasks() { 
+			var searchTemplate = this.search.toLowerCase();
+				return tasks.filter((task) => {
+				return task.name.toLowerCase().includes(searchTemplate) || task.description.toLowerCase().includes(searchTemplate)
+			})
+		}
+	}	
 })

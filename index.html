@@ -4,49 +4,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="app.css">
 	<title>Reminders</title>
 	  </head>
   <body>
   
- <div class="container-fluid pt-5" id="app">
+ <div class="container pt-5" id="app">
 	<div class="row mb-3">
 		<div class="col">
 			<h1>Главная</h1>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col md-1">
+		<div class="col md-2">
 			<nav class="nav nav flex-column">
 				<button 
 						type="button" 
-						class="btn btn-success">Новое событие
-				</button></br>
+						class="btn btn-outline-secondary d-block mr-auto" >Новое событие
+				</button>
+					</br>
 				<button 
 						type="button" 
-						class="btn btn-success">Журнал
+						class="btn btn-outline-secondary d-block mr-auto" v-on:click="jnlVisibility = true">Журнал
 				</button>
 			</nav>
 
 		</div>
 	
-		<div class="col md-9 pt-2" >
-			<label for="search">Поиск события</label>
-			<input type="text" class="form-control" id="search" placeholder="Название, описание...">
+		<div class="col md-6 pt-2" v-if="jnlVisibility" >
+			<label for="Search">Поиск события</label>
+			<input type="text" 
+				   class="form-control" 
+				   id="Search" 
+				   placeholder="Название, описание..."
+				   v-model="search">
 		<hr>
 			<ul class="list-group">
 				<li 
-					v-for="(task, index) of tasks"
+					v-for="(task, index) in filteredTasks"
 					class="list-group-item list-group-item-action pointer"
 					v-on:click="selectTask(index), cardVisibility = true"
-					v-bind:class="{'active': selectTaskIndex === index}"
+					v-bind:class="{'active': selectedTaskIndex === index}"
 				>
 					{{ task.name }}
 				</li>
 			</ul>
 		</div>
 		
-		<div class="col md-3 pt-2">
+		<div class="col md-4 pt-2">
 			<div class="row">
 				<div class="card" style="width: 20rem;" v-if="cardVisibility">
 				  <div class="card-body">
