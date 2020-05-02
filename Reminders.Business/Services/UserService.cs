@@ -21,9 +21,10 @@ namespace Reminders.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<UserResponse>> GetAllAsync()
         {
-            return await _userRepository.GetAllUserAsync();
+            var entitys = await _userRepository.GetAllUserAsync();
+            return _mapper.Map<List<UserResponse>>(entitys);
         }
 
         public async Task<long> AddAsync(UserRequest newUser)
