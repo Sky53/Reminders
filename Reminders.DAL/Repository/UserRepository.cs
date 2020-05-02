@@ -25,7 +25,10 @@ namespace Reminders.DAL.Repository
 
         public async Task<User> FindByIdAsync(long id)
         {
-            return await _context.Users.FindAsync(id);
+            var entity = await _context.Users.FindAsync(id);
+            _context.Entry(entity).State = EntityState.Detached;
+
+            return entity;
         }
 
         
