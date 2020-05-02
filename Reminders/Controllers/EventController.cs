@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reminders.Business.Abstraction;
+using Reminders.Business.AutoMapper.Event;
 using Reminders.Domain.Models;
 
 namespace Reminders.API.Controllers
@@ -31,10 +32,28 @@ namespace Reminders.API.Controllers
         // POST: api/event/creat-events
         [HttpPost]
         [Route("creat-events")]
-        public async Task<IActionResult> SetEvent([FromBody]Event request)
+        public async Task<IActionResult> SetEvent([FromBody]EventRequest request)
         {
             var response = await _eventService.AddAsync(request);
             return Ok(response);
+        }
+
+        // PUT: api/event/update-events
+        [HttpPut]
+        [Route("update-events/{id}")]
+        public async Task<IActionResult> UpdateEvent([FromBody]EventRequest request, long id)
+        {
+            var response = await _eventService.UpdateAsync(id, request);
+            return Ok(response);
+        }
+
+        // Delete: api/event/delete-events
+        [HttpDelete]
+        [Route("delete-events/{id}")]
+        public async Task<IActionResult> DeleteEvent(long id)
+        {
+            await _eventService.DeleteAsync(id);
+            return Ok();
         }
     }
 }

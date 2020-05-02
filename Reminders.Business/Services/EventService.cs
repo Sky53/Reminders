@@ -1,4 +1,6 @@
-﻿using Reminders.Business.Abstraction;
+﻿using AutoMapper;
+using Reminders.Business.Abstraction;
+using Reminders.Business.AutoMapper.Event;
 using Reminders.DAL.Abstraction;
 using Reminders.Domain.Models;
 using System;
@@ -11,21 +13,44 @@ namespace Reminders.Business.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
+        private readonly IMapper _mapper;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IMapper mapper)
         {
             _eventRepository = eventRepository;
+            _mapper = mapper;
         }
 
-        public async Task<int> AddAsync(Event request)
+        public async Task<long> AddAsync(EventRequest request)
         {
-            var id = await _eventRepository.SaveAsync(request);
+            var newEvent = _mapper.Map<Event>(request);
+            newEvent.CreatedDate = DateTime.Now;
+            var id = await _eventRepository.SaveAsync(newEvent);
+
             return id;
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            var deletedEvent = await _eventRepository.FindByIdAsync(id);
+            deletedEvent.isDeleted = true;
+
+            await _eventRepository.DeleteAsync(deletedEvent);
         }
 
         public async Task<List<Event>> GetAllAsync()
         {
-            return await _eventRepository.GetAllEvent();
+            return await _eventRepository.GetAllEventAsync();
+        }
+
+        public async Task<EventResponse> UpdateAsync(long id, EventRequest updateEvent)
+        {
+
+            var newEvent = _mapper.Map<Event>(updateEvent);
+            newEvent.Id = id;
+            await _eventRepository.UppdateAsync(newEvent);
+
+           return _mapper.Map<EventResponse>(newEvent);
         }
     }
 }

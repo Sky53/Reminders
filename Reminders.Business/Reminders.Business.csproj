@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Reminders.DAL\Reminders.DAL.csproj" />
     <ProjectReference Include="..\Reminders.Domain\Reminders.Domain.csproj" />
   </ItemGroup>
