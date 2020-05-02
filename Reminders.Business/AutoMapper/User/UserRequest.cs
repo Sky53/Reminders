@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Reminders.Domain.Models
+namespace Reminders.Business.AutoMapper.User
 {
-    public class User
+    public class UserRequest
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        
         public string? SecondName { get; set; }
+        [Required]
         public DateTime? Birthday { get; set; }
-        public bool IsDeleted { get; set; }
-
-        public List<Event> Events { get; set; }
     }
 }

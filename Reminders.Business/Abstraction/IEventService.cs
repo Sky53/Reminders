@@ -1,4 +1,5 @@
-﻿using Reminders.Domain.Models;
+﻿using Reminders.Business.AutoMapper.Event;
+using Reminders.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,8 @@ namespace Reminders.Business.Abstraction
     public interface IEventService
     {
         public Task<List<Event>> GetAllAsync();
-        public Task<int> AddAsync(Event request);
+        public Task<long> AddAsync(EventRequest request);
+        public Task<EventResponse> UpdateAsync(long id, EventRequest updateEvent);
+        public Task DeleteAsync(long id);
     }
 }

@@ -8,8 +8,10 @@ namespace Reminders.DAL.Abstraction
 {
     public interface IEventRepository
     {
-        public Task<List<Event>> GetAllEvent();
-
-        public Task<int> SaveAsync(Event newEvent);
+        public Task<List<Event>> GetAllEventAsync();
+        public Task<long> SaveAsync(Event newEvent);
+        public Task<Event> FindByIdAsync(long id);
+        Task<Event> UppdateAsync(Event updateEvent);
+        Task DeleteAsync(Event deletedEvent);
     }
 }
