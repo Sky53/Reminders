@@ -9,7 +9,7 @@ namespace Reminders.Business.Abstraction
 {
     public interface IUserService
     {
-        public Task<List<User>> GetAllAsync();
+        public Task<List<UserResponse>> GetAllAsync();
         public Task<long> AddAsync(UserRequest newUser);
         public Task<UserResponse> UpdateAsync(long id, UserRequest updateUser);
         public Task DeleteAsync(long id);

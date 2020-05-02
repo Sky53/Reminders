@@ -26,7 +26,11 @@ namespace Reminders.DAL.Repository
 
         public async Task<Event> FindByIdAsync(long id)
         {
-            return await _context.Events.FindAsync(id);
+            //var entity = await _context.Events.AsNoTracking().FirstAsync(ev => ev.Id == id);
+            var entity = await _context.Events.FindAsync(id);
+            _context.Entry(entity).State = EntityState.Detached;
+
+            return entity;
         }
 
         public async Task<long> SaveAsync(Event newEvent)

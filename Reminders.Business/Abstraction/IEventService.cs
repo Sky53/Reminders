@@ -9,7 +9,7 @@ namespace Reminders.Business.Abstraction
 {
     public interface IEventService
     {
-        public Task<List<Event>> GetAllAsync();
+        public Task<List<EventResponse>> GetAllAsync();
         public Task<long> AddAsync(EventRequest request);
         public Task<EventResponse> UpdateAsync(long id, EventRequest updateEvent);
         public Task DeleteAsync(long id);

@@ -38,16 +38,19 @@ namespace Reminders.Business.Services
             await _eventRepository.DeleteAsync(deletedEvent);
         }
 
-        public async Task<List<Event>> GetAllAsync()
+        public async Task<List<EventResponse>> GetAllAsync()
         {
-            return await _eventRepository.GetAllEventAsync();
+            var events = await _eventRepository.GetAllEventAsync();
+            return _mapper.Map<List<EventResponse>>(events);
         }
 
         public async Task<EventResponse> UpdateAsync(long id, EventRequest updateEvent)
         {
-
+            var currentEvents = await _eventRepository.FindByIdAsync(id);
+            
             var newEvent = _mapper.Map<Event>(updateEvent);
             newEvent.Id = id;
+            newEvent.CreatedDate = currentEvents.CreatedDate;
             await _eventRepository.UppdateAsync(newEvent);
 
            return _mapper.Map<EventResponse>(newEvent);
