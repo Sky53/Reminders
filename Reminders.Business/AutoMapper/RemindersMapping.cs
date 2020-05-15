@@ -13,6 +13,9 @@ namespace Reminders.Business.AutoMapper
 
             CreateMap<UserRequest, Domain.Models.User>();
             CreateMap<Domain.Models.User, UserResponse>();
+
+            CreateMap<UserAuthorization, Domain.Models.User>();
+            CreateMap<Domain.Models.User, UserAuthorization>();
         }
     }
 }

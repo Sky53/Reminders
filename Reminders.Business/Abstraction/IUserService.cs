@@ -13,5 +13,6 @@ namespace Reminders.Business.Abstraction
         public Task<long> AddAsync(UserRequest newUser);
         public Task<UserResponse> UpdateAsync(long id, UserRequest updateUser);
         public Task DeleteAsync(long id);
+        public Task<string> Authorization(UserAuthorization request);
     }
 }

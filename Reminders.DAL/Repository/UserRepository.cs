@@ -59,5 +59,10 @@ namespace Reminders.DAL.Repository
             _context.Users.Update(deletedUser);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<User> FindByLogginAndPasswordAsync(string login, string password)
+        {
+            return  _context.Users.FirstOrDefault(u => u.Login.Equals(login) && u.Password.Equals(password));
+        }
     }
 }

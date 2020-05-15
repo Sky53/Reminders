@@ -13,5 +13,6 @@ namespace Reminders.DAL.Abstraction
         public Task<User> FindByIdAsync(long id);
         Task<User> UppdateAsync(User updateUser);
         Task DeleteAsync(User deletedUser);
+        Task<User> FindByLogginAndPasswordAsync(string login, string password);
     }
 }

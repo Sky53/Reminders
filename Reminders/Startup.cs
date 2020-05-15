@@ -1,17 +1,21 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Reminders.Business.Abstraction;
 using Reminders.Business.AutoMapper;
+using Reminders.Business.Config;
 using Reminders.Business.Services;
 using Reminders.DAL;
 using Reminders.DAL.Abstraction;
 using Reminders.DAL.Repository;
+using System.Text;
 
 namespace Reminders
 {
@@ -30,6 +34,30 @@ namespace Reminders
             {
                 options.UseNpgsql(Configuration["ConnectionString"]);
             });
+
+            var jwtConfig = Configuration.GetSection("Jwt");
+            services.Configure<JwtConfig>(jwtConfig);
+
+            var jwtSettings = jwtConfig.Get<JwtConfig>();
+            var key = Encoding.ASCII.GetBytes(jwtSettings.Key);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddAutoMapper(typeof(Startup), typeof(RemindersMapping));
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
