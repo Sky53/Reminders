@@ -53,9 +53,4 @@ new Vue({
 			})
 		}
 	},
-	/* filters: {
-		ndate(value) {
-			return value.toLocaleString()
-		}
-	} */
 })
