@@ -1,0 +1,1 @@
+$ ( 'input [name = "date"]' ) . daterangepicker ( ) ;

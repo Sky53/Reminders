@@ -1,0 +1,51 @@
+.pointer {
+	cursor: pointer;
+}
+
+.bt1 {
+	min-width: 200px;
+	width: 100%;
+}
+.bt2 {
+	text-align: center;
+	display: inline-block;
+}
+
+h1 {
+	margin-left: 15px;
+}
+
+.btndelete {
+	border: 1px solid black;
+	background: #ff6666;
+}
+
+.btnedit {
+	border: 1px solid black;
+	background: #228b22;
+}
+
+.adaptive {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+
+.typeOpacity{
+	background: rgba(205, 214, 219, 0.3);
+}
+
+.cardOpacity{
+	background: rgba(205, 214, 219, 0.3);
+}
+
+body {
+	background-image: url(../light1920.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color:#464646;
+}
+}
