@@ -116,16 +116,6 @@
   </form>
   </div>
 
-
-  <!-- <label for="description" class="col-form-label"><strong><font color="red">*</font>Описание:</strong></label>
-  <input type="text"
-    v-model="NewTaskDescription"
-    class="form-control"
-    placeholder="Например: записаться к врачу по номеру..."
-    id="description"
-    > -->
-
-
 		<div class="col-lg-4 col-sm-12 col-xs-12 col-md-6" v-if="FormNewTask" >
 			<form v-on:submit.prevent="makeNewTask">
         <p v-if="errors.length">
