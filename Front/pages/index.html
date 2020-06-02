@@ -4,19 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/app.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css">
 	<title>eminders</title>
-	<link rel = "shortcut icon" type = "image/svg" sizes="100x100" href = "../registered-solid.svg" >
+	<link rel = "shortcut icon" type = "image/svg" sizes="100x100" href = "../img/registered-solid.svg" >
   </head>
 <body>
 
 <div id="app">
  <div class="container pt-5">
-	<div class="row mr-2">
+	<div class="row mr-2" v-if="nameform">
 			<h1>Добро пожаловать, UserName</h1> <!--  сюда дописать userLogin, для персонализации, типа - добро пожаловать, Алексей -->
 	</div>
 	<div class="row">
-		<div class="col-lg-4 col-sm-12 col-xs-12 col-md-6 pt-2">
+		<div class="col-lg-4 col-sm-12 col-xs-12 col-md-6 pt-2" v-if="btform">
 			<nav class="nav nav flex-column">
 				<button
 						type="button"
@@ -31,6 +32,13 @@
             v-on:click="jnlVisibility = true, FormNewTask = false"
             >Журнал
 				</button>
+          </br>
+        <button
+            type="button"
+            class="btn bt3 btn-outline-secondary d-block mr-auto"
+            v-on:click="cardVisibility=false, btform=false, nameform=false, formautoriz=true, jnlVisibility=false, FormNewTask=false"
+            >Выйти
+        </button>
 			</nav>
 		</div>
 
@@ -56,11 +64,11 @@
 					<button
 						class="btn btndelete float-right"
 						v-on:click="tasks.splice(index, 1), cardVisibility = false, deleteOrder">
-            <img src="../delete.png" title="Удалить" width="15px" height="15px">
+            <img src="../img/delete.png" title="Удалить" width="15px" height="15px">
 					</button>
           <button
             class="btn btnedit float-right mr-1">
-            <img src="../edit.png" title="Редактировать" width="15px" height="15px">
+            <img src="../img/edit.png" title="Редактировать" width="15px" height="15px">
           </button>
 				</li>
 			</ul>
@@ -68,16 +76,64 @@
 
 		<!--  -->
 
+	<div class="col-lg-4 col-sm-12 col-xs-12 col-md-6 pt-2" v-if="formautoriz" >
+    <h1>Авторизуйтесь</h1>
+    <form id="app" @submit="checkForm" action="#" method="post" novalidate="true">
+
+    <p v-if="errors.length">
+      <b>Проверьте данные:</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+    </p>
+    <p>
+      <label for="userLogin" class="col-form-label"><strong>Логин:</strong><label>
+      </p>
+      <p>
+      <input type="text"
+              class="userLogin"
+              name="userLogin"
+              id="userLogin"
+              v-model="userLogin">
+    </p>
+    <p>
+      <label for="userPassword" class="col-form-label"><strong>Пароль:</strong><label>
+      </p>
+      <p>
+      <input type="password"
+              class="userPassword"
+              name="userPassword"
+              id="userPassword"
+              v-model="userPassword">
+    </p>
+
+<button type="submit"
+        class="btn bt4"
+        value="Submit"
+        >Войти</button>
+
+
+  </form>
+  </div>
+
+
+  <!-- <label for="description" class="col-form-label"><strong><font color="red">*</font>Описание:</strong></label>
+  <input type="text"
+    v-model="NewTaskDescription"
+    class="form-control"
+    placeholder="Например: записаться к врачу по номеру..."
+    id="description"
+    > -->
+
+
 		<div class="col-lg-4 col-sm-12 col-xs-12 col-md-6" v-if="FormNewTask" >
 			<form v-on:submit.prevent="makeNewTask">
-
         <p v-if="errors.length">
             <b>Не заполнено одно из обязательных полей:</b>
             <ul>
               <li v-for="error in errors">{{ error }}</li>
             </ul>
           </p>
-
 
 					<div class="input-form-group">
 						<label for="name" class="col-form-label"><strong><font color="red">*</font>Название:</strong></label>
@@ -119,7 +175,7 @@
             v-on:click="FormNewTask = false, cardVisibility = false">Отмена</button>
 				<button type="button submit"
 						class="btn btn-success"
-            @click="newOrder"
+            @click="makeNewTask"
 						>Создать</button>
 
 		</div>
@@ -177,6 +233,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="../js/app.js"></script>
+<script src="../js/nwapp.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+</body>
  </html>

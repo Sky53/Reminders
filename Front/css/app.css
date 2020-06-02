@@ -2,13 +2,34 @@
 	cursor: pointer;
 }
 
+.tx {
+	margin-left: 10px;
+}
+
+.userLogin, .userPassword {
+	min-width: 200px;
+	width: 100%;
+}
+
 .bt1 {
 	min-width: 200px;
 	width: 100%;
 }
+
 .bt2 {
 	text-align: center;
 	display: inline-block;
+}
+
+.bt3{
+	min-width: 200px;
+	width: 100%;
+}
+
+.bt4 {
+	min-width: 200px;
+	width: 100%;
+	border: 1px solid black;
 }
 
 h1 {
@@ -31,7 +52,6 @@ h1 {
 	height: auto;
 }
 
-
 .typeOpacity{
 	background: rgba(205, 214, 219, 0.3);
 }
@@ -41,11 +61,7 @@ h1 {
 }
 
 body {
-	background-image: url(../light1920.jpg);
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background-color: #efefef;
+	height: 100vh;
 	background-size: cover;
-	background-color:#464646;
-}
 }
