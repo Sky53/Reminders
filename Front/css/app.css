@@ -2,13 +2,18 @@
 	cursor: pointer;
 }
 
-.tx {
-	margin-left: 10px;
-}
-
-.userLogin, .userPassword {
+#userLogin, #userPassword {
 	min-width: 200px;
 	width: 100%;
+	padding: 10px;
+	box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
+	border: 1px solid black;
+	background: url(../img/user.png) 10px no-repeat;
+	padding-left: 40px;
+}
+
+#userPassword {
+	background: url(../img/block.png) 10px no-repeat;
 }
 
 .bt1 {
@@ -19,6 +24,8 @@
 .bt2 {
 	text-align: center;
 	display: inline-block;
+	border: 1px solid black;
+	background-color: #308968;
 }
 
 .bt3{
@@ -30,6 +37,13 @@
 	min-width: 200px;
 	width: 100%;
 	border: 1px solid black;
+	background-color: #308968;
+}
+
+.bt5 {
+	min-width: 30px;
+	border: 1px solid black;
+	background-color: #308968;
 }
 
 h1 {
@@ -43,7 +57,7 @@ h1 {
 
 .btnedit {
 	border: 1px solid black;
-	background: #228b22;
+	background: #308968;
 }
 
 .adaptive {
